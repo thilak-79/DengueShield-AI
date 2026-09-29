@@ -50,14 +50,15 @@ export default function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
           </div>
         </div>
 
-        {/* Prototype Status Banner Badge */}
+        {/* Mode-neutral Research Prototype Banner */}
         <div className="mx-4 mt-4 p-3 bg-slate-800/80 rounded-xl border border-slate-700/60 text-xs">
           <div className="flex items-center gap-1.5 text-amber-400 font-semibold mb-1">
             <ShieldAlert className="w-3.5 h-3.5 shrink-0" />
             <span>Research Prototype</span>
           </div>
           <p className="text-[11px] text-slate-400 leading-snug">
-            Historical evaluation & decision support. Not official alerts.
+            Historical evaluation and experimental current inference for decision support.<br />
+            Not an official public-health alert system.
           </p>
         </div>
 

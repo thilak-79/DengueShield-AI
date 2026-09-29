@@ -36,7 +36,7 @@ export default function ForecastDriversPanel({ districtDetail, explanationData }
       <div className="flex items-center justify-between mb-4">
         <div>
           <h3 className="text-sm font-bold text-slate-900">Key Model Drivers (SHAP Analysis)</h3>
-          <p className="text-xs text-slate-500">Factors influencing this model prediction for {districtDetail.district}</p>
+          <p className="text-xs text-slate-500">Model features contributing to this prediction for {districtDetail.district}</p>
         </div>
         <span className="text-[10px] font-mono bg-teal-50 text-teal-800 border border-teal-200 px-2 py-0.5 rounded">
           Local SHAP

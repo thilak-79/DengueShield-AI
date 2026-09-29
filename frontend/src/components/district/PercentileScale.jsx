@@ -9,7 +9,7 @@ export default function PercentileScale({ districtDetail }) {
   const p90 = districtDetail.historical_p90 || 0;
   const current = districtDetail.current_cases || 0;
   const forecast = districtDetail.forecast_cases_1w || 0;
-  const activity = districtDetail.activity_level || 'LOW';
+  const activity = districtDetail.relative_activity || districtDetail.activity_level || 'LOW';
 
   // Calculate percentage positions for scale (0% to 100%)
   const maxVal = Math.max(p90 * 1.3, current * 1.1, forecast * 1.1, 10);
@@ -40,7 +40,7 @@ export default function PercentileScale({ districtDetail }) {
         <div className="p-2.5 bg-emerald-50/60 border border-emerald-200/60 rounded-xl">
           <div className="text-[10px] uppercase font-bold text-emerald-800">P50 (Median)</div>
           <div className="text-sm font-extrabold text-emerald-950 mt-0.5">{formatNumber(p50)}</div>
-          <div className="text-[10px] text-emerald-700">LOW ≤ P50</div>
+          <div className="text-[10px] text-emerald-700">LOW: &lt; P50</div>
         </div>
         <div className="p-2.5 bg-amber-50/60 border border-amber-200/60 rounded-xl">
           <div className="text-[10px] uppercase font-bold text-amber-800">P75 Threshold</div>

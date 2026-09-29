@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart3, Award } from 'lucide-react';
+import { BarChart3, Award, Info } from 'lucide-react';
 import apiService from '../services/api';
+import { useMode } from '../context/ModeContext';
 import WalkForwardChart from '../components/charts/WalkForwardChart';
 import PrototypeDisclaimer from '../components/common/PrototypeDisclaimer';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -8,6 +9,7 @@ import ErrorMessage from '../components/common/ErrorMessage';
 import { formatNumber } from '../utils/formatters';
 
 export default function PerformancePage() {
+  const { isCurrent } = useMode();
   const [perfData, setPerfData] = useState(null);
   const [walkForwardData, setWalkForwardData] = useState(null);
   const [walkForwardDetails, setWalkForwardDetails] = useState(null);
@@ -61,7 +63,22 @@ export default function PerformancePage() {
         </span>
       </div>
 
-      <PrototypeDisclaimer type="general" />
+      {isCurrent ? (
+        <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl shadow-xs space-y-1.5 text-amber-950">
+          <div className="flex items-center gap-2 text-amber-900 font-extrabold text-xs uppercase tracking-wider">
+            <Info className="w-4 h-4 text-amber-700" />
+            HISTORICAL VALIDATION METRICS
+          </div>
+          <p className="text-xs leading-relaxed font-medium">
+            The performance results below come from historical walk-forward evaluation over 2020–2025. The Experimental Current 2026 forecast does not yet have observed target-week outcomes and therefore does not have current accuracy metrics.
+          </p>
+          <p className="text-xs leading-relaxed text-amber-800">
+            These historical results provide context for the model used in current experimental inference; they are not measurements of 2026 forecast accuracy.
+          </p>
+        </div>
+      ) : (
+        <PrototypeDisclaimer type="general" />
+      )}
 
       {/* Honest Scientific Conclusion Card */}
       <div className="p-5 bg-teal-900 text-white rounded-2xl shadow-md border border-teal-800 space-y-2">
@@ -70,7 +87,7 @@ export default function PerformancePage() {
           Empirical Research Findings
         </div>
         <p className="text-xs sm:text-sm text-teal-100 leading-relaxed">
-          Persistence achieved lower 1-week MAE in 2020, 2021 and 2023, while Random Forest achieved lower MAE in 2022, 2024 and 2025. Random Forest beats persistence in 3 of 6 evaluation years. At 2-week and 4-week horizons, persistence remains highly competitive and may outperform machine-learning models overall.
+          Persistence achieved lower 1-week MAE in 2020, 2021 and 2023, while Random Forest achieved lower MAE in 2022, 2024 and 2025. Random Forest beats persistence in 3 of 6 evaluation years. At the 2-week and 4-week horizons, persistence achieved lower mean MAE than both Random Forest and LightGBM across the six walk-forward evaluation years.
         </p>
       </div>
 
@@ -130,7 +147,7 @@ export default function PerformancePage() {
                 <th className="p-3">Mean RMSE</th>
                 <th className="p-3">Mean sMAPE</th>
                 <th className="p-3">Years Beating Persistence</th>
-                <th className="p-3">Mean MAE Imprv %</th>
+                <th className="p-3">Mean MAE Improvement vs Persistence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-800">

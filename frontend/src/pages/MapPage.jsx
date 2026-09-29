@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { MapPin, ArrowRight } from 'lucide-react';
 import apiService from '../services/api';
+import { useMode } from '../context/ModeContext';
 import DistrictMap from '../components/map/DistrictMap';
 import PrototypeDisclaimer from '../components/common/PrototypeDisclaimer';
+import CurrentInferenceWarning from '../components/common/CurrentInferenceWarning';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
 import { ACTIVITY_CONFIG, formatNumber, normalizeDistrictName } from '../utils/formatters';
@@ -11,6 +13,7 @@ import { ACTIVITY_CONFIG, formatNumber, normalizeDistrictName } from '../utils/f
 export default function MapPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { isCurrent } = useMode();
   const [latestData, setLatestData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +25,9 @@ export default function MapPage() {
     setLoading(true);
     setError(null);
     try {
-      const data = await apiService.getLatestActivity();
+      const data = isCurrent 
+        ? await apiService.getCurrentActivity()
+        : await apiService.getLatestActivity();
       setLatestData(data);
     } catch (err) {
       setError(err);
@@ -33,9 +38,9 @@ export default function MapPage() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isCurrent]);
 
-  if (loading) return <LoadingSpinner message="Loading Sri Lanka district spatial map data..." />;
+  if (loading) return <LoadingSpinner message={isCurrent ? "Loading 2026 current spatial activity map..." : "Loading Sri Lanka district spatial map data..."} />;
   if (error) return <ErrorMessage error={error} onRetry={fetchData} />;
 
   // Extract district array from latestData.data
@@ -49,7 +54,8 @@ export default function MapPage() {
     setSelectedDistrictName(name);
   };
 
-  const selCfg = ACTIVITY_CONFIG[selectedDistrictData?.activity_level] || ACTIVITY_CONFIG['LOW'];
+  const actLevel = selectedDistrictData?.relative_activity || selectedDistrictData?.activity_level || 'LOW';
+  const selCfg = ACTIVITY_CONFIG[actLevel] || ACTIVITY_CONFIG['LOW'];
 
   return (
     <div className="space-y-6">
@@ -59,19 +65,27 @@ export default function MapPage() {
         <div>
           <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             <MapPin className="w-5 h-5 text-teal-700" />
-            Sri Lanka District Activity Map
+            {isCurrent ? 'Experimental 2026 Sri Lanka District Map' : 'Sri Lanka District Activity Map'}
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Geographic view of relative dengue activity across all 25 administrative districts
+            {isCurrent 
+              ? '2026 Week 37 NDCU operational surveillance relative activity spatial view' 
+              : 'Geographic view of relative dengue activity across all 25 administrative districts'}
           </p>
         </div>
 
-        <span className="text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200 px-3 py-1 rounded-full self-start sm:self-auto">
+        <span className={`text-xs font-semibold border px-3 py-1 rounded-full self-start sm:self-auto ${
+          isCurrent ? 'bg-amber-100 text-amber-900 border-amber-300' : 'bg-teal-50 text-teal-800 border-teal-200'
+        }`}>
           25 Districts Loaded
         </span>
       </div>
 
-      <PrototypeDisclaimer type="percentiles" />
+      {isCurrent ? (
+        <CurrentInferenceWarning />
+      ) : (
+        <PrototypeDisclaimer type="percentiles" />
+      )}
 
       {/* Grid: Map on Left, District Summary on Right */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -94,7 +108,7 @@ export default function MapPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Selected District</span>
                   <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${selCfg.badgeBg} ${selCfg.badgeText}`}>
-                    {selectedDistrictData.activity_level}
+                    {actLevel}
                   </span>
                 </div>
                 <h2 className="text-2xl font-black text-slate-900 mt-1">{selectedDistrictData.district}</h2>
@@ -143,7 +157,7 @@ export default function MapPage() {
               </div>
 
               <p className="text-[11px] text-slate-500 italic">
-                * Relative activity categories compare the predicted case count with {selectedDistrictData.district}'s historical distribution.
+                * Relative activity compares this district with its own historical distribution.
               </p>
 
             </div>

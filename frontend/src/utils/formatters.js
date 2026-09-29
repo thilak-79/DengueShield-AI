@@ -12,7 +12,7 @@ export const ACTIVITY_CONFIG = {
     badgeText: 'text-red-700',
     color: '#dc2626',
     dot: 'bg-red-500',
-    description: 'Predicted activity is above the district\'s historical 90th percentile (P90).'
+    description: '≥ historical P90'
   },
   'HIGH': {
     label: 'HIGH',
@@ -23,7 +23,7 @@ export const ACTIVITY_CONFIG = {
     badgeText: 'text-orange-700',
     color: '#ea580c',
     dot: 'bg-orange-500',
-    description: 'Predicted activity is between the district\'s historical 75th (P75) and 90th (P90) percentiles.'
+    description: 'P75 – P90'
   },
   'ELEVATED': {
     label: 'ELEVATED',
@@ -34,7 +34,7 @@ export const ACTIVITY_CONFIG = {
     badgeText: 'text-amber-700',
     color: '#d97706',
     dot: 'bg-amber-500',
-    description: 'Predicted activity is between the district\'s historical median (P50) and 75th percentile (P75).'
+    description: 'P50 – P75'
   },
   'LOW': {
     label: 'LOW',
@@ -45,7 +45,7 @@ export const ACTIVITY_CONFIG = {
     badgeText: 'text-emerald-700',
     color: '#059669',
     dot: 'bg-emerald-500',
-    description: 'Predicted activity is at or below the district\'s historical median (P50).'
+    description: '< historical P50'
   },
   'NO DATA': {
     label: 'NO DATA',
@@ -56,7 +56,7 @@ export const ACTIVITY_CONFIG = {
     badgeText: 'text-slate-700',
     color: '#94a3b8',
     dot: 'bg-slate-400',
-    description: 'No forecast data available for this district.'
+    description: 'No data'
   }
 };
 

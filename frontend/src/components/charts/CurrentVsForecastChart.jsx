@@ -9,7 +9,6 @@ import {
   Legend, 
   CartesianGrid 
 } from 'recharts';
-import { ACTIVITY_CONFIG } from '../../utils/formatters';
 
 export default function CurrentVsForecastChart({ districtsData }) {
   const [sortBy, setSortBy] = useState('current'); // 'current' | 'forecast' | 'name'
@@ -22,7 +21,7 @@ export default function CurrentVsForecastChart({ districtsData }) {
     current: Math.round(d.current_cases || 0),
     forecast: Math.round(d.forecast_cases_1w || 0),
     persistence: Math.round(d.persistence_forecast_1w || 0),
-    activity: d.activity_level || 'LOW'
+    activity: d.relative_activity || d.activity_level || 'LOW'
   })).sort((a, b) => {
     if (sortBy === 'forecast') return b.forecast - a.forecast;
     if (sortBy === 'name') return a.name.localeCompare(b.name);
@@ -55,16 +54,17 @@ export default function CurrentVsForecastChart({ districtsData }) {
         </div>
       </div>
 
-      <div className="h-80 w-full">
+      <div className="h-[380px] w-full">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 40 }}>
+          <BarChart data={chartData} margin={{ top: 10, right: 10, left: -10, bottom: 65 }}>
             <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
             <XAxis 
               dataKey="name" 
               angle={-45} 
               textAnchor="end" 
               interval={0} 
-              tick={{ fontSize: 10, fill: '#64748b' }} 
+              tick={{ fontSize: 11, fill: '#475569' }} 
+              dy={5}
             />
             <YAxis tick={{ fontSize: 11, fill: '#64748b' }} />
             <Tooltip 

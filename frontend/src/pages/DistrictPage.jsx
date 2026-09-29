@@ -7,15 +7,18 @@ import {
   Minus
 } from 'lucide-react';
 import apiService from '../services/api';
+import { useMode } from '../context/ModeContext';
 import PercentileScale from '../components/district/PercentileScale';
 import ForecastDriversPanel from '../components/district/ForecastDriversPanel';
 import PrototypeDisclaimer from '../components/common/PrototypeDisclaimer';
+import CurrentInferenceWarning from '../components/common/CurrentInferenceWarning';
 import LoadingSpinner from '../components/common/LoadingSpinner';
 import ErrorMessage from '../components/common/ErrorMessage';
 import { ACTIVITY_CONFIG, formatNumber, formatPercent } from '../utils/formatters';
 
 export default function DistrictPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isCurrent } = useMode();
   const [districtList, setDistrictList] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState(searchParams.get('name') || 'Colombo');
   const [districtDetail, setDistrictDetail] = useState(null);
@@ -25,28 +28,37 @@ export default function DistrictPage() {
 
   // Fetch all 25 district names for dropdown selector
   useEffect(() => {
-    apiService.getDistricts()
+    const fetchList = isCurrent ? apiService.getCurrentDistricts() : apiService.getDistricts();
+    fetchList
       .then(res => {
-        // Handle both res.districts array or direct array
         const list = res?.districts || (Array.isArray(res) ? res : []);
         if (list.length > 0) {
           setDistrictList(list);
         }
       })
       .catch(err => console.error('Failed to load district list:', err));
-  }, []);
+  }, [isCurrent]);
 
-  // Fetch district details and explanation when selected District changes
+  // Fetch district details and explanation when selected District or Mode changes
   const fetchDistrictData = async (districtName) => {
     setLoading(true);
     setError(null);
     try {
-      const [detailRes, expRes] = await Promise.all([
-        apiService.getDistrictDetail(districtName),
-        apiService.getDistrictExplanation(districtName).catch(() => null)
-      ]);
-      setDistrictDetail(detailRes?.district || detailRes);
-      setExplanationData(expRes);
+      if (isCurrent) {
+        const [detailRes, expRes] = await Promise.all([
+          apiService.getCurrentDistrict(districtName),
+          apiService.getCurrentDistrictExplanation(districtName).catch(() => null)
+        ]);
+        setDistrictDetail(detailRes?.district || detailRes);
+        setExplanationData(expRes);
+      } else {
+        const [detailRes, expRes] = await Promise.all([
+          apiService.getDistrictDetail(districtName),
+          apiService.getDistrictExplanation(districtName).catch(() => null)
+        ]);
+        setDistrictDetail(detailRes?.district || detailRes);
+        setExplanationData(expRes);
+      }
     } catch (err) {
       setError(err);
     } finally {
@@ -58,7 +70,7 @@ export default function DistrictPage() {
     if (selectedDistrict) {
       fetchDistrictData(selectedDistrict);
     }
-  }, [selectedDistrict]);
+  }, [selectedDistrict, isCurrent]);
 
   const handleDistrictChange = (e) => {
     const newName = e.target.value;
@@ -70,7 +82,8 @@ export default function DistrictPage() {
   if (error) return <ErrorMessage error={error} onRetry={() => fetchDistrictData(selectedDistrict)} />;
 
   const d = districtDetail;
-  const cfg = ACTIVITY_CONFIG[d?.activity_level] || ACTIVITY_CONFIG['LOW'];
+  const actLevel = d?.relative_activity || d?.activity_level || 'LOW';
+  const cfg = ACTIVITY_CONFIG[actLevel] || ACTIVITY_CONFIG['LOW'];
 
   const trendIcon = d?.forecast_trend === 'INCREASING' ? TrendingUp :
                     d?.forecast_trend === 'DECREASING' ? TrendingDown : Minus;
@@ -84,7 +97,7 @@ export default function DistrictPage() {
         <div>
           <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             <Building2 className="w-5 h-5 text-teal-700" />
-            District Activity Explorer
+            {isCurrent ? 'Current 2026 District Activity Explorer' : 'District Activity Explorer'}
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Detailed 1-week dengue activity forecast and SHAP driver analysis
@@ -115,7 +128,11 @@ export default function DistrictPage() {
         </div>
       </div>
 
-      <PrototypeDisclaimer type="general" />
+      {isCurrent ? (
+        <CurrentInferenceWarning />
+      ) : (
+        <PrototypeDisclaimer type="general" />
+      )}
 
       {/* Main Metric Cards Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -124,14 +141,14 @@ export default function DistrictPage() {
         <div className="p-4 bg-white rounded-2xl border border-slate-200/80 shadow-xs">
           <div className="text-[11px] font-semibold text-slate-500 uppercase">Current Cases</div>
           <div className="text-2xl font-black text-slate-900 mt-1">{formatNumber(d?.current_cases)}</div>
-          <div className="text-[10px] text-slate-400 mt-0.5">Reported weekly</div>
+          <div className="text-[10px] text-slate-400 mt-0.5">{isCurrent ? 'NDCU Reported Wk 37' : 'Reported weekly'}</div>
         </div>
 
         {/* Card 2: 1-Week RF Forecast */}
         <div className="p-4 bg-teal-50/70 rounded-2xl border border-teal-200 shadow-xs">
           <div className="text-[11px] font-bold text-teal-800 uppercase">1-Wk RF Forecast</div>
           <div className="text-2xl font-black text-teal-950 mt-1">{formatNumber(d?.forecast_cases_1w)}</div>
-          <div className="text-[10px] text-teal-700 mt-0.5">Random Forest model</div>
+          <div className="text-[10px] text-teal-700 mt-0.5">{isCurrent ? 'RF Refit Model' : 'Random Forest model'}</div>
         </div>
 
         {/* Card 3: Persistence Benchmark */}
@@ -164,7 +181,7 @@ export default function DistrictPage() {
         <div className={`p-4 rounded-2xl border ${cfg.bg} ${cfg.border} shadow-xs flex flex-col justify-between`}>
           <div className="text-[10px] font-bold tracking-wider uppercase text-slate-600">Relative Activity</div>
           <div className={`text-base font-black ${cfg.text} mt-1`}>
-            {d?.activity_level || 'LOW'}
+            {actLevel}
           </div>
           <div className="text-[10px] text-slate-500">Historical percentile</div>
         </div>

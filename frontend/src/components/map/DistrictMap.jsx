@@ -3,6 +3,12 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet';
 import geoJsonData from '../../assets/data/sri_lanka_districts.json';
 import { ACTIVITY_CONFIG, formatNumber, normalizeDistrictName } from '../../utils/formatters';
 
+// Helper to extract activity category consistently across Historical (activity_level) and Current (relative_activity) records
+function getActivityLevel(dRecord) {
+  if (!dRecord) return null;
+  return dRecord.relative_activity || dRecord.activity_level || null;
+}
+
 export default function DistrictMap({ latestDistricts, selectedDistrict, onSelectDistrict }) {
   // Map API districts by normalized district name
   const districtMap = useMemo(() => {
@@ -56,9 +62,9 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
     const normKey = normalizeDistrictName(rawName);
     
     const dData = districtMap[normKey];
-    const activity = dData?.activity_level;
+    const activity = getActivityLevel(dData);
     
-    // Explicit check: do NOT default unmatched districts to LOW!
+    // Explicit check: only matched districts with valid activity level get colored
     const cfg = activity ? (ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG['NO DATA']) : ACTIVITY_CONFIG['NO DATA'];
 
     const isSelected = selectedDistrict && normalizeDistrictName(selectedDistrict) === normKey;
@@ -69,7 +75,7 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
       opacity: 1,
       color: isSelected ? '#0f172a' : '#ffffff',
       dashArray: '',
-      fillOpacity: isSelected ? 0.85 : (activity ? 0.75 : 0.4)
+      fillOpacity: isSelected ? 0.90 : (activity ? 0.80 : 0.4)
     };
   };
 
@@ -81,7 +87,7 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
     const dData = districtMap[normKey];
 
     if (!dData) {
-      // Explicit No Data tooltip state
+      // Explicit No Data tooltip state for unmapped offshore reef features
       layer.bindTooltip(`
         <div style="font-family: system-ui, sans-serif; padding: 4px;">
           <div style="font-weight: 700; font-size: 13px; color: #475569;">${rawName}</div>
@@ -93,7 +99,7 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
 
     const currentCases = formatNumber(dData.current_cases);
     const forecastCases = formatNumber(dData.forecast_cases_1w);
-    const activity = dData.activity_level || 'UNKNOWN';
+    const activity = getActivityLevel(dData) || 'UNKNOWN';
     const trend = dData.forecast_trend || 'STABLE';
 
     const cfg = ACTIVITY_CONFIG[activity] || ACTIVITY_CONFIG['LOW'];
@@ -133,7 +139,7 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
         l.setStyle({
           weight: 3,
           color: '#0f172a',
-          fillOpacity: 0.9
+          fillOpacity: 0.95
         });
       },
       mouseout: (e) => {
@@ -142,7 +148,7 @@ export default function DistrictMap({ latestDistricts, selectedDistrict, onSelec
         l.setStyle({
           weight: isSel ? 3 : 1.5,
           color: isSel ? '#0f172a' : '#ffffff',
-          fillOpacity: isSel ? 0.85 : 0.75
+          fillOpacity: isSel ? 0.90 : 0.80
         });
       },
       click: () => {
