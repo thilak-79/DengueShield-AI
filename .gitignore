@@ -36,3 +36,6 @@ Thumbs.db
 # Downloaded NDCU raw reports
 data/raw/dengue/reports/*.pdf
 "@ | Set-Content .gitignore
+*_debug.txt
+
+data/raw/dengue/denguedatahub_srilanka_weekly.rda
