@@ -1,0 +1,21 @@
+check,status,details
+NDCU case dataset,PASS,data\processed\dengue_weekly_historical.csv
+historical feature dataset,PASS,data\processed\ml_features_2015_2025.csv
+1-week RF model,PASS,models\random_forest\random_forest_1w.joblib
+latest district count,PASS,25
+duplicate district-week rows,PASS,0
+negative cases,PASS,0
+latest 5 weeks complete,PASS,"{33: 25, 34: 25, 35: 25, 36: 25, 37: 25}"
+latest national case total,PASS,1156
+report week 33,PASS,2026-08-10 to 2026-08-16
+report week 34,PASS,2026-08-17 to 2026-08-23
+report week 35,PASS,2026-08-24 to 2026-08-30
+report week 36,PASS,2026-08-31 to 2026-09-06
+report week 37,PASS,2026-09-07 to 2026-09-13
+week windows are 7 days,PASS,"[6, 6, 6, 6, 6]"
+recent week windows contiguous,PASS,Each week begins one day after previous week ends.
+model raw input feature count,PASS,35
+model features available in reference,PASS,[]
+seasonality formula reproduction,PASS,exact surveillance-midpoint day-of-year encoding; max_sin_error=1.11022302463e-16; max_cos_error=1.11022302463e-16
+NDCU vs WER source bridge,WARN,"925 overlapping district-weeks; diagnostic MAE=10.699; correlation=0.955. Week semantics differ, so this is diagnostic only."
+surveillance source semantics,WARN,"Operational cases come from NDCU, while the historical ML model was developed using WER-aligned data. Do not treat inference as a validated official live forecast."

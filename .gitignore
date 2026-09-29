@@ -50,3 +50,6 @@ models/explainability/shap_feature_values_2025.csv
 frontend/.env
 frontend/node_modules/
 frontend/dist/
+
+# Operational intermediate weather
+data/interim/current_weather_daily.csv

@@ -1,0 +1,23 @@
+{
+  "latest_year": 2026,
+  "latest_week": 37,
+  "latest_national_cases": 1156,
+  "district_count": 25,
+  "recent_weeks": [
+    33,
+    34,
+    35,
+    36,
+    37
+  ],
+  "latest_week_start": "2026-09-07",
+  "latest_week_end": "2026-09-13",
+  "forecast_target_start": "2026-09-14",
+  "forecast_target_end": "2026-09-20",
+  "data_freshness_date": "2026-09-13",
+  "case_source": "NDCU Weekly Dengue Update",
+  "training_source": "WER-aligned historical surveillance",
+  "operational_status": "READY_FOR_EXPERIMENTAL_INFERENCE",
+  "source_semantics_warning": true,
+  "generated_at_utc": "2026-09-29T13:15:08.809721+00:00"
+}
