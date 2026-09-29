@@ -1,0 +1,26 @@
+district,current_cases,forecast_cases_1w,persistence_forecast_1w,forecast_percent_change,forecast_trend,activity_level,top_driver_1,top_driver_2,top_driver_3
+Colombo,318.0,295.15499991223595,318.0,-7.183962291749701,STABLE,HIGH,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Gampaha,202.0,198.4298866161893,202.0,-1.7673828632726274,STABLE,HIGH,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Galle,81.0,71.75012365024725,81.0,-11.419600431793524,DECREASING,HIGH,Current dengue cases,Recent 2-week case average,Cases 1 week ago
+Jaffna,78.0,69.99541861471292,78.0,-10.262283827291132,DECREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Kandy,82.0,68.27473116258928,82.0,-16.73813272854966,DECREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 4-week case average
+Ratnapura,43.0,56.96537171733518,43.0,32.47760864496554,INCREASING,ELEVATED,Recent 4-week case average,Current dengue cases,Recent 2-week case average
+Kalutara,53.0,56.476626326810425,53.0,6.559672314736652,STABLE,ELEVATED,Recent 2-week case average,Recent 4-week case average,Recent 4-week rainfall
+Matara,67.0,55.68629713144783,67.0,-16.886123684406222,DECREASING,HIGH,Current dengue cases,Cases 1 week ago,Recent 4-week case average
+Kegalle,36.0,35.97866467425644,36.0,-0.0592647937321031,STABLE,ELEVATED,Cases 1 week ago,Current dengue cases,Recent 4-week rainfall
+Matale,25.0,27.771990000720987,25.0,11.087960002883946,INCREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 4-week rainfall
+Kurunegala,24.0,27.535727054787245,24.0,14.73219606161352,INCREASING,LOW,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Trincomalee,26.0,26.94239545732056,26.0,3.624597912771389,STABLE,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Puttalam,30.0,26.33508802533181,30.0,-12.216373248893966,DECREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Hambantota,28.0,24.939371014643744,28.0,-10.930817804843771,DECREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Ampara,22.0,23.114775291723,22.0,5.067160416922724,STABLE,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Batticaloa,14.0,18.92681010962427,14.0,35.1915007830305,INCREASING,LOW,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Badulla,18.0,18.6065268519937,18.0,3.3695936221872183,STABLE,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Monaragala,14.0,16.74554875522807,14.0,19.61106253734337,INCREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Anuradhapura,12.0,11.67478756753922,12.0,-2.710103603839838,STABLE,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Kilinochchi,10.0,8.484432003588145,10.0,-15.155679964118551,DECREASING,HIGH,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Polonnaruwa,6.0,8.481246982184263,6.0,41.35411636973772,INCREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Nuwara Eliya,3.0,7.476725205268349,3.0,149.22417350894497,INCREASING,ELEVATED,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Mannar,5.0,7.397726144552427,5.0,47.95452289104855,INCREASING,HIGH,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Mullaitivu,2.0,3.811920354736962,2.0,90.59601773684808,INCREASING,HIGH,Current dengue cases,Cases 1 week ago,Recent 2-week case average
+Vavuniya,2.0,2.128758082109149,2.0,6.437904105457459,STABLE,LOW,Current dengue cases,Cases 1 week ago,Recent 2-week case average
