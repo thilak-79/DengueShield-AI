@@ -33,4 +33,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.log
+# Downloaded NDCU raw reports
+data/raw/dengue/reports/*.pdf
 "@ | Set-Content .gitignore
