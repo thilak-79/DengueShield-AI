@@ -716,7 +716,7 @@ def district_detail(
 # ============================================================
 
 @app.get(
-    "/api/explanation/{district}"
+    "/api/explanation/district/{district}"
 )
 def district_explanation(
     district: str,
