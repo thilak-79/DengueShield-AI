@@ -45,3 +45,8 @@ data/raw/weather/daily/*.csv
 # SHAP derived matrices
 models/explainability/shap_values_2025.csv
 models/explainability/shap_feature_values_2025.csv
+
+# Frontend environment
+frontend/.env
+frontend/node_modules/
+frontend/dist/
