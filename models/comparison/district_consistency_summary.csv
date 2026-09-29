@@ -1,0 +1,10 @@
+model,horizon_weeks,districts_better,districts_worse,districts_equal,mean_district_mae_improvement
+lightgbm,1,17,8,0,0.19702313497777163
+lightgbm,2,19,6,0,0.11338074043074373
+lightgbm,4,17,8,0,0.25297345904548796
+random_forest,1,20,5,0,0.3472906580064907
+random_forest,2,17,8,0,0.24023874466960493
+random_forest,4,12,13,0,0.02397628840025633
+xgboost,1,18,7,0,0.24985106179199995
+xgboost,2,18,7,0,0.17327441095680016
+xgboost,4,16,9,0,0.22773782061360026
