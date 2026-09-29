@@ -1,0 +1,33 @@
+{
+  "mode": "EXPERIMENTAL_CURRENT_INFERENCE",
+  "latest_year": 2026,
+  "latest_week": 37,
+  "surveillance_window_start": "2026-09-07",
+  "surveillance_window_end": "2026-09-13",
+  "forecast_target_start": "2026-09-14",
+  "forecast_target_end": "2026-09-20",
+  "data_freshness_date": "2026-09-13",
+  "district_count": 25,
+  "current_total_cases": 1156.0,
+  "forecast_total_cases": 1030.1311342773568,
+  "forecast_net_change": -125.86886572264325,
+  "forecast_percent_change": -10.888310183619659,
+  "activity_counts": {
+    "LOW": 6,
+    "ELEVATED": 13,
+    "HIGH": 5,
+    "VERY HIGH": 1
+  },
+  "trend_counts": {
+    "INCREASING": 7,
+    "STABLE": 7,
+    "DECREASING": 10,
+    "UNKNOWN": 1
+  },
+  "forecast_model": "Random Forest full-history refit",
+  "case_source": "NDCU",
+  "training_source": "WER-aligned historical surveillance",
+  "source_semantics_warning": true,
+  "official_public_health_alert": false,
+  "disclaimer": "Experimental current inference. NDCU operational surveillance is being used with a model trained on WER-aligned historical data. This is not an official Ministry of Health forecast or alert."
+}
