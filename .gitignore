@@ -41,3 +41,7 @@ data/raw/dengue/reports/*.pdf
 data/raw/dengue/denguedatahub_srilanka_weekly.rda
 
 data/raw/weather/daily/*.csv
+
+# SHAP derived matrices
+models/explainability/shap_values_2025.csv
+models/explainability/shap_feature_values_2025.csv
