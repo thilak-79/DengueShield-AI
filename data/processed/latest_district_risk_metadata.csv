@@ -1,0 +1,8 @@
+metric,value
+district_count,25
+forecast_horizon_weeks,1
+model,random_forest
+activity_threshold_type,district-specific historical percentiles
+activity_levels,LOW < P50; ELEVATED P50-P75; HIGH P75-P90; VERY HIGH >= P90
+official_alert_thresholds,No
+shap_causality,No - SHAP explains model behavior only
