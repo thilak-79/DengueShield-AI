@@ -1,55 +1,90 @@
-@"
+# ============================================================
 # Python
+# ============================================================
+
 .venv/
 venv/
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
+
+# ============================================================
 # Environment variables
-.env
+# ============================================================
 
+.env
+.env.*
+frontend/.env
+
+
+# ============================================================
 # Jupyter
+# ============================================================
+
 .ipynb_checkpoints/
 
+
+# ============================================================
 # IDE
+# ============================================================
+
 .vscode/
 .idea/
 
+
+# ============================================================
 # Node / React
+# ============================================================
+
 node_modules/
 frontend/node_modules/
+frontend/dist/
 
-# Models
+
+# ============================================================
+# Models / large generated binaries
+# ============================================================
+
 *.joblib
 *.pkl
 *.pt
 *.pth
 
+
+# ============================================================
 # OS
+# ============================================================
+
 .DS_Store
 Thumbs.db
 
-# Temporary files
+
+# ============================================================
+# Temporary / debug files
+# ============================================================
+
 *.tmp
 *.log
-# Downloaded NDCU raw reports
-data/raw/dengue/reports/*.pdf
-"@ | Set-Content .gitignore
 *_debug.txt
 
+
+# ============================================================
+# Downloaded / reproducible data
+# ============================================================
+
+data/raw/dengue/reports/*.pdf
 data/raw/dengue/denguedatahub_srilanka_weekly.rda
-
 data/raw/weather/daily/*.csv
-
-# SHAP derived matrices
-models/explainability/shap_values_2025.csv
-models/explainability/shap_feature_values_2025.csv
-
-# Frontend environment
-frontend/.env
-frontend/node_modules/
-frontend/dist/
 
 # Operational intermediate weather
 data/interim/current_weather_daily.csv
+
+
+# ============================================================
+# Large derived SHAP matrices
+# ============================================================
+
+models/explainability/shap_values_2025.csv
+models/explainability/shap_feature_values_2025.csv
