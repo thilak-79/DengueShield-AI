@@ -1,0 +1,26 @@
+district,status,rows,start_date,end_date,file
+Ampara,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\ampara.csv
+Anuradhapura,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\anuradhapura.csv
+Badulla,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\badulla.csv
+Batticaloa,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\batticaloa.csv
+Colombo,existing,4383,2014-01-01,2025-12-31,data\raw\weather\daily\colombo.csv
+Galle,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\galle.csv
+Gampaha,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\gampaha.csv
+Hambantota,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\hambantota.csv
+Jaffna,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\jaffna.csv
+Kalutara,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\kalutara.csv
+Kandy,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\kandy.csv
+Kegalle,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\kegalle.csv
+Kilinochchi,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\kilinochchi.csv
+Kurunegala,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\kurunegala.csv
+Mannar,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\mannar.csv
+Matale,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\matale.csv
+Matara,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\matara.csv
+Monaragala,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\monaragala.csv
+Mullaitivu,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\mullaitivu.csv
+Nuwara Eliya,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\nuwara_eliya.csv
+Polonnaruwa,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\polonnaruwa.csv
+Puttalam,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\puttalam.csv
+Ratnapura,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\ratnapura.csv
+Trincomalee,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\trincomalee.csv
+Vavuniya,downloaded,4383,2014-01-01,2025-12-31,data\raw\weather\daily\vavuniya.csv

@@ -39,3 +39,5 @@ data/raw/dengue/reports/*.pdf
 *_debug.txt
 
 data/raw/dengue/denguedatahub_srilanka_weekly.rda
+
+data/raw/weather/daily/*.csv
